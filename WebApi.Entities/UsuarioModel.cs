@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebApi.Entities
 {
-    public class ENT_Usuario
+    public class UsuarioModel
     {
         public int ID { get; set; }
         [Required]

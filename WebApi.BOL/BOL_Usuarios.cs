@@ -7,14 +7,17 @@ using WebApi;
 using WebApi.Management;
 namespace WebApi.BOL
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class BOL_Usuarios
     {
-        public Entities.ENT_Usuario RegisterUser(Entities.ENT_Usuario pUsuario)
+        TRN.TRN_Usuarios usuarios = new TRN.TRN_Usuarios();
+        Entities.UsuarioModel objuser = new Entities.UsuarioModel();
+        TRN.TRN_Utils utils = new TRN.TRN_Utils();
+        bool pResp = false;
+        public Entities.UsuarioModel RegisterUser(Entities.UsuarioModel pUsuario)
         {
-            TRN.TRN_Usuarios usuarios = new TRN.TRN_Usuarios();
-            Entities.ENT_Usuario objuser = new Entities.ENT_Usuario();
-            TRN.TRN_Utils utils = new TRN.TRN_Utils();
-            //string passEncript = utils.Encriptar(pUsuario.PasswordHash);
             pUsuario.PasswordHash = utils.Encriptar(pUsuario.PasswordHash);
             try
             {
@@ -27,6 +30,21 @@ namespace WebApi.BOL
                 throw new ArgumentException(ex.Message.ToString());
             }
             return objuser;
+        }
+
+        public bool GetUserLogin(string User, string Password)
+        {
+            //Encripto la contraseña, para verificar con la registrada en la BD
+            try
+            {
+                Password = utils.Encriptar(Password);
+                pResp = usuarios.GetUserLogin(User, Password);
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.Message.ToString());
+            }
+            return pResp;
         }
     }
 }

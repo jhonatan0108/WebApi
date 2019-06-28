@@ -10,6 +10,8 @@ namespace WebApi.TRN
     public class TRN_Usuarios
     {
         DAL.Data.UsuariosEntities usuariosEntities = new DAL.Data.UsuariosEntities();
+        bool pResp = false;
+
         DAL.Data.Users _User = new DAL.Data.Users();
         public int RegisterUser(DAL.Data.Users pUser)
         {
@@ -38,6 +40,21 @@ namespace WebApi.TRN
                 throw new ArgumentException(e.Message);
             }
             return _User;
+        }
+
+        public bool GetUserLogin(string User, string Password)
+        {
+            try
+            {
+                _User = usuariosEntities.Users.Where(x => x.UserName == User.ToUpper() && x.PasswordHash == Password).FirstOrDefault();
+                if (_User != null)
+                    pResp = true;
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException(e.Message);
+            }
+            return pResp;
         }
     }
 }

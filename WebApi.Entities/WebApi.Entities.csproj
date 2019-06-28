@@ -42,8 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ENT_ObjUser.cs" />
-    <Compile Include="ENT_Usuario.cs" />
+    <Compile Include="ObjUserModel.cs" />
+    <Compile Include="UsuarioModel.cs" />
+    <Compile Include="LoginUserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

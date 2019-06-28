@@ -9,36 +9,65 @@ using WebApi;
 
 namespace WebApi.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// 
+    [System.Web.Http.AllowAnonymous]
+    [System.Web.Http.RoutePrefix("api/Users")]
     public class UsuariosController : ApiController
     {
+        BOL.BOL_Usuarios _bolUser = new BOL.BOL_Usuarios();
+        Entities.ObjUserModel objResp = new Entities.ObjUserModel();
+        bool pResp = false;
+
         [HttpPost]
-        public Entities.ENT_ObjUser RegisterUser(Entities.ENT_Usuario usuario)
+        [Route("registerUser")]
+        public Entities.ObjUserModel RegisterUser(Entities.UsuarioModel usuario)
         {
-            Entities.ENT_ObjUser objResp = new Entities.ENT_ObjUser();
-            BOL.BOL_Usuarios _bolUser = new BOL.BOL_Usuarios();
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    objResp.ent_Usuario = _bolUser.RegisterUser(usuario);
-                    if (objResp.ent_Usuario != null)
+                    objResp.User = _bolUser.RegisterUser(usuario);
+                    if (objResp.User != null)
                     {
-                        objResp.Mensaje = "Se registro con Exito el Usuario";
-                        objResp.pRespuesta = true;
+                        objResp.Message = "Se registro con Exito el Usuario";
+                        objResp.Response = true;
                     }
                     else
                     {
-                        objResp.Mensaje = "Se presento un inconveniente con el registro del usuario, por favor vuelva a intentar.";
-                        objResp.pRespuesta = false;
+                        objResp.Message = "Se presento un inconveniente con el registro del usuario, por favor vuelva a intentar.";
+                        objResp.Response = false;
                     }
                 }
                 catch (Exception ex)
                 {
-                    objResp.Mensaje = "No se pudo completar la peticion. " + ex.Message.ToString();
-                    objResp.pRespuesta = false;
+                    objResp.Message = "No se pudo completar la peticion. " + ex.Message.ToString();
+                    objResp.Response = false;
                 }
             }
+            else
+            {
+                objResp.Message = "Por favor envie todos los campos.";
+                objResp.Response = false;
+            }
             return objResp;
+        }
+        [HttpPost]
+        [Route("loginUser")]
+        public bool LoginUser(Entities.LoginUserModel pLogin)
+        {
+            try
+            {
+                pResp = _bolUser.GetUserLogin(pLogin.UserName, pLogin.Password);
+            }
+            catch (Exception)
+            {
+                return pResp;
+            }
+            return pResp;
         }
     }
 }
