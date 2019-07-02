@@ -46,5 +46,18 @@ namespace WebApi.BOL
             }
             return pResp;
         }
+        public List<Entities.UsuarioModel> getUsers()
+        {
+            List<Entities.UsuarioModel> listUsers = new List<Entities.UsuarioModel>();
+            try
+            {
+                listUsers = Management.UsersBuilder.UsersBuilder.ListEntityToUser(usuarios.getUsers());
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.Message.ToString());
+            }
+            return listUsers;
+        }
     }
 }

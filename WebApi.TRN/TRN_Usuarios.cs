@@ -56,5 +56,18 @@ namespace WebApi.TRN
             }
             return pResp;
         }
+        public List<DAL.Data.Users> getUsers()
+        {
+            List<DAL.Data.Users> listUser = new List<DAL.Data.Users>();
+            try
+            {
+                listUser = usuariosEntities.Users.ToList();
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException(e.Message);
+            }
+            return listUser;
+        }
     }
 }

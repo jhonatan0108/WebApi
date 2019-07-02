@@ -69,5 +69,32 @@ namespace WebApi.Controllers
             }
             return pResp;
         }
+        [HttpGet]
+        [Route("getUsers")]
+        public Entities.ListUsersModel getUsers()
+        {
+            Entities.ListUsersModel listUsers = new Entities.ListUsersModel();
+            try
+            {
+                listUsers.Users = _bolUser.getUsers();
+                if (listUsers.Users != null)
+                {
+                    listUsers.Message = "Se consulto con Exito la informacion";
+                    listUsers.Response = true;
+                }
+                else
+                {
+                    listUsers.Message = "Se presento un inconveniente consultado la informacion, por favor vuelva a intentar.";
+                    listUsers.Response = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                listUsers.Message = "No se pudo completar la peticion. " + ex.Message.ToString();
+                listUsers.Response = false;
+            }
+
+            return listUsers;
+        }
     }
 }

@@ -12,4 +12,10 @@ namespace WebApi.Entities
         public string Message { get; set; }
         public bool Response { get; set; }
     }
+    public class ListUsersModel
+    {
+        public List<UsuarioModel> Users { get; set; }
+        public string Message { get; set; }
+        public bool Response { get; set; }
+    }
 }
