@@ -13,8 +13,8 @@ namespace WebApi.Controllers
     /// 
     /// </summary>
     /// 
-    [System.Web.Http.AllowAnonymous]
-    [System.Web.Http.RoutePrefix("api/Users")]
+    [AllowAnonymous]
+    [RoutePrefix("api/Users")]
     public class UsuariosController : ApiController
     {
         BOL.BOL_Usuarios _bolUser = new BOL.BOL_Usuarios();
@@ -22,6 +22,7 @@ namespace WebApi.Controllers
         bool pResp = false;
 
         [HttpPost]
+        [AllowAnonymous]
         [Route("registerUser")]
         public Entities.ObjUserModel RegisterUser(Entities.UsuarioModel usuario)
         {
@@ -56,6 +57,7 @@ namespace WebApi.Controllers
             return objResp;
         }
         [HttpPost]
+        [AllowAnonymous]
         [Route("loginUser")]
         public bool LoginUser(Entities.LoginUserModel pLogin)
         {
@@ -70,6 +72,7 @@ namespace WebApi.Controllers
             return pResp;
         }
         [HttpGet]
+        [Authorize]
         [Route("getUsers")]
         public Entities.ListUsersModel getUsers()
         {
