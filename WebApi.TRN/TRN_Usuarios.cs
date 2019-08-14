@@ -41,20 +41,17 @@ namespace WebApi.TRN
             }
             return _User;
         }
-
-        public bool GetUserLogin(string User, string Password)
+        public DAL.Data.Users GetUserByUser(string pUserName)
         {
             try
             {
-                _User = usuariosEntities.Users.Where(x => x.UserName == User.ToUpper() && x.PasswordHash == Password).FirstOrDefault();
-                if (_User != null)
-                    pResp = true;
+                _User = usuariosEntities.Users.Where(x => x.UserName == pUserName).FirstOrDefault();
             }
             catch (Exception e)
             {
                 throw new ArgumentException(e.Message);
             }
-            return pResp;
+            return _User;
         }
         public List<DAL.Data.Users> getUsers()
         {

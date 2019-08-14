@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web.Helpers;
 using System.Web.Http;
 using WebApi;
+
 
 namespace WebApi.Controllers
 {
@@ -15,6 +17,7 @@ namespace WebApi.Controllers
     /// 
     [AllowAnonymous]
     [RoutePrefix("api/Users")]
+
     public class UsuariosController : ApiController
     {
         BOL.BOL_Usuarios _bolUser = new BOL.BOL_Usuarios();
@@ -31,6 +34,7 @@ namespace WebApi.Controllers
             {
                 try
                 {
+
                     objResp.User = _bolUser.RegisterUser(usuario);
                     if (objResp.User != null)
                     {
@@ -72,8 +76,9 @@ namespace WebApi.Controllers
             return pResp;
         }
         [HttpGet]
-        [Authorize]
+        //[Authorize(Roles = "Admin")]
         [Route("getUsers")]
+
         public Entities.ListUsersModel getUsers()
         {
             Entities.ListUsersModel listUsers = new Entities.ListUsersModel();
@@ -96,7 +101,6 @@ namespace WebApi.Controllers
                 listUsers.Message = "No se pudo completar la peticion. " + ex.Message.ToString();
                 listUsers.Response = false;
             }
-
             return listUsers;
         }
     }
