@@ -10,8 +10,6 @@ namespace WebApi.TRN
     public class TRN_Usuarios
     {
         DAL.Data.UsuariosEntities usuariosEntities = new DAL.Data.UsuariosEntities();
-        bool pResp = false;
-
         DAL.Data.Users _User = new DAL.Data.Users();
         public int RegisterUser(DAL.Data.Users pUser)
         {
