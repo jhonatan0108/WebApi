@@ -29,12 +29,11 @@ namespace WebApi.Controllers
         [Route("registerUser")]
         public Entities.ObjUserModel RegisterUser(Entities.UsuarioModel usuario)
         {
-
+            //Pruebas de ramas
             if (ModelState.IsValid)
             {
                 try
                 {
-
                     objResp.User = _bolUser.RegisterUser(usuario);
                     if (objResp.User != null)
                     {
