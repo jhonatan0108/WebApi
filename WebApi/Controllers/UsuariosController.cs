@@ -34,7 +34,7 @@ namespace WebApi.Controllers
             {
                 try
                 {
-
+                    //Prueba de cambio 2
                     objResp.User = _bolUser.RegisterUser(usuario);
                     if (objResp.User != null)
                     {
