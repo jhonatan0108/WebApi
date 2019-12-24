@@ -37,6 +37,8 @@ namespace WebApi.Controllers
                     //pasdspps p
 
                     //asdfsdflsdflsdflsdfsdflsdf *sad
+
+                    //asdfkdfkddkddk
                     objResp.User = _bolUser.RegisterUser(usuario);
                     if (objResp.User != null)
                     {
