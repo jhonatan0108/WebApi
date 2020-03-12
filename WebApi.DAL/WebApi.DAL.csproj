@@ -50,6 +50,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL_Logs.cs" />
+    <Compile Include="Data\Log.cs">
+      <DependentUpon>Neptuno.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\ModelUsers.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -64,6 +68,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelUsers.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Neptuno.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Neptuno.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Neptuno.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Neptuno.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Neptuno.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Neptuno.edmx</DependentUpon>
     </Compile>
     <Compile Include="Data\Users.cs">
       <DependentUpon>ModelUsers.tt</DependentUpon>
@@ -81,6 +100,13 @@
     <None Include="Data\ModelUsers.edmx.diagram">
       <DependentUpon>ModelUsers.edmx</DependentUpon>
     </None>
+    <EntityDeploy Include="Data\Neptuno.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Neptuno.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Data\Neptuno.edmx.diagram">
+      <DependentUpon>Neptuno.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -94,9 +120,25 @@
       <DependentUpon>ModelUsers.edmx</DependentUpon>
       <LastGenOutput>ModelUsers.cs</LastGenOutput>
     </Content>
+    <Content Include="Data\Neptuno.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Neptuno.edmx</DependentUpon>
+      <LastGenOutput>Neptuno.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Neptuno.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Neptuno.edmx</DependentUpon>
+      <LastGenOutput>Neptuno.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebApi.Entities\WebApi.Entities.csproj">
+      <Project>{cbdd0b66-1201-448a-b243-57ecc71dcb50}</Project>
+      <Name>WebApi.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

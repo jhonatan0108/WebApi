@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebApi.Entities;
 using WebApi.DAL;
+using WebApi.DAL.Data;
 
 namespace WebApi.Management.UsersBuilder
 {
@@ -71,6 +72,23 @@ namespace WebApi.Management.UsersBuilder
                 listData.Add(Response);
             }
             return listData;
+        }
+
+        public static Log LogToEntity(ObjLogModel OBJlog)
+        {
+            try
+            {
+                Log response = new Log()
+                {
+                    Status = OBJlog.Status,
+                    date_transaction = OBJlog.DateTransaction
+                };
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error En MX - " + ex.Message);
+            }
         }
     }
 }
