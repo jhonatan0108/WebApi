@@ -74,16 +74,38 @@ namespace WebApi.Management.UsersBuilder
             return listData;
         }
 
-        public static Log LogToEntity(ObjLogModel OBJlog)
+        public static DAL.Data.Log LogToEntity(ObjLogModel OBJlog)
         {
             try
             {
-                Log response = new Log()
+                DAL.Data.Log response = new DAL.Data.Log()
                 {
                     Status = OBJlog.Status,
-                    date_transaction = OBJlog.DateTransaction
+                    date_transaction = DateTime.Parse(OBJlog.DateTransaction.ToString("MM/dd/yyyy HH:mm:ss"))
                 };
                 return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error En MX - " + ex.Message);
+            }
+        }
+        public static List<ObjLogModel> ListLogToEntity(List<Log> ListLogs)
+        {
+            try
+            {
+                List<ObjLogModel> _List = new List<ObjLogModel>();
+                foreach (var item in ListLogs)
+                {
+                    ObjLogModel response = new ObjLogModel()
+                    {
+                        Status = item.Status,
+                        DateTransaction = DateTime.Parse(item.date_transaction.ToString("MM/dd/yyyy HH:mm:ss"))
+                    };
+                    _List.Add(response);
+                }
+
+                return _List;
             }
             catch (Exception ex)
             {

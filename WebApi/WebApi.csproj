@@ -212,7 +212,6 @@
     <None Include="Properties\PublishProfiles\WebApiTo - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\WebApiTo - ReadOnly - FTP1.pubxml" />
     <None Include="Properties\PublishProfiles\WebApiTo - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\WebApiTo2020 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

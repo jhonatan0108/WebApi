@@ -1,12 +1,14 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Helpers;
 using System.Web.Http;
 using WebApi;
+using WebApi.BOL;
 using WebApi.Entities;
 
 namespace WebApi.Controllers
@@ -23,7 +25,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                return new BOL.BOL_Logs().InsertLog(pLog);
+                return new BOL_Logs().InsertLog(pLog);
             }
             catch (Exception ex)
             {
@@ -31,8 +33,74 @@ namespace WebApi.Controllers
                 {
                     Response = false,
                     Message = ex.Message,
+                    ListLog = new List<ObjLogModel>()
                 };
             }
         }
+
+        [HttpGet]
+        [AcceptVerbs("GET")]
+        [Route("GetListLogs")]
+        public ObjResponse GetListLogs()
+        {
+            ObjResponse response = new ObjResponse();
+            try
+            {
+
+                response.ListLog = new BOL_Logs().GetListLogs();
+                if (response.ListLog != null)
+                {
+                    response.Message = "Se consulto con Exito la informacion";
+                    response.Response = true;
+                }
+                else
+                {
+                    response.Message = "Se presento un inconveniente consultado la informacion, por favor vuelva a intentar.";
+                    response.Response = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Message = "No se pudo completar la peticion. " + ex.Message.ToString();
+                response.Response = false;
+            }
+            return response;
+        }
+
+        [HttpGet]
+        [AcceptVerbs("POST")]
+        [Route("GetListLogsByDate")]
+        public ObjResponse GetListLogsByDate(ObjFilterLogByDate objFilter)
+        {
+            ObjResponse response = new ObjResponse();
+            try
+            {
+                CultureInfo MyCultureInfo = new CultureInfo("es-CO");
+
+                DateTime FecFin = DateTime.ParseExact(objFilter.EndDate, "dd/MM/yyyy", MyCultureInfo);
+                DateTime FecIni = DateTime.ParseExact(objFilter.StarDate, "dd/MM/yyyy", MyCultureInfo);
+                if (FecFin < FecIni)
+                    throw new Exception("La Fecha final no puede ser menor a la fecha inicial");
+
+                response.ListLog = new BOL_Logs().GetListLogs(FecIni, FecFin);
+                if (response.ListLog != null)
+                {
+                    response.Message = "Se consulto con Exito la informacion";
+                    response.Response = true;
+                }
+                else
+                {
+                    response.Message = "Se presento un inconveniente consultado la informacion, por favor vuelva a intentar.";
+                    response.Response = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Message = "No se pudo completar la peticion. " + ex.Message.ToString();
+                response.Response = false;
+            }
+            return response;
+        }
+
     }
 }
