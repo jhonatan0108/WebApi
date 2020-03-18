@@ -21,11 +21,12 @@ namespace WebApi.Controllers
         [Route("InsertLog")]
         [AcceptVerbs("GET", "POST")]
         [HttpPost]
-        public ObjResponse InsertLOG(ObjLogModel pLog)
+        public ObjResponse InsertLOG(ObjLogModel data_log)
         {
             try
             {
-                return new BOL_Logs().InsertLog(pLog);
+                data_log.DateTransaction = DateTime.Now;
+                return new BOL_Logs().InsertLog(data_log);
             }
             catch (Exception ex)
             {

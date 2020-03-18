@@ -13,7 +13,6 @@ namespace WebApi.Entities
 
         public bool Status { get => _Status; set => _Status = value; }
         public DateTime DateTransaction { get => _DateTransaction; set => _DateTransaction = value; }
-
     }
     public class ObjResponse
     {
