@@ -81,7 +81,8 @@ namespace WebApi.Management.UsersBuilder
                 DAL.Data.Log response = new DAL.Data.Log()
                 {
                     Status = OBJlog.Status,
-                    date_transaction = DateTime.Parse(OBJlog.DateTransaction.ToString("MM/dd/yyyy HH:mm:ss"))
+                    date_transaction = DateTime.Parse(OBJlog.DateTransaction.ToString("MM/dd/yyyy HH:mm:ss")),
+                    Uid = OBJlog.Uid
                 };
                 return response;
             }
@@ -100,7 +101,8 @@ namespace WebApi.Management.UsersBuilder
                     ObjLogModel response = new ObjLogModel()
                     {
                         Status = item.Status,
-                        DateTransaction = DateTime.Parse(item.date_transaction.ToString("MM/dd/yyyy HH:mm:ss"))
+                        DateTransaction = DateTime.Parse(item.date_transaction.ToString("MM/dd/yyyy HH:mm:ss")),
+                        Uid=item.Uid
                     };
                     _List.Add(response);
                 }

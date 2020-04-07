@@ -10,9 +10,11 @@ namespace WebApi.Entities
     {
         private bool _Status;
         private DateTime _DateTransaction = DateTime.MinValue;
+        private int _Uid;
 
         public bool Status { get => _Status; set => _Status = value; }
         public DateTime DateTransaction { get => _DateTransaction; set => _DateTransaction = value; }
+        public int Uid { get => _Uid; set => _Uid = value; }
     }
     public class ObjResponse
     {
@@ -27,7 +29,9 @@ namespace WebApi.Entities
     {
         private string _StarDate = string.Empty;
         private string _EndDate = string.Empty;
+        private int _Uid;
         public string StarDate { get => _StarDate; set => _StarDate = value; }
         public string EndDate { get => _EndDate; set => _EndDate = value; }
+        public int Uid { get => _Uid; set => _Uid = value; }
     }
 }

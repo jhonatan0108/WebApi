@@ -25,7 +25,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                data_log.DateTransaction = DateTime.Now;
+                //data_log.DateTransaction = DateTime.Now;
                 return new BOL_Logs().InsertLog(data_log);
             }
             catch (Exception ex)
@@ -83,7 +83,7 @@ namespace WebApi.Controllers
                 if (FecFin < FecIni)
                     throw new Exception("La Fecha final no puede ser menor a la fecha inicial");
 
-                response.ListLog = new BOL_Logs().GetListLogs(FecIni, FecFin);
+                response.ListLog = new BOL_Logs().GetListLogs(FecIni, FecFin, objFilter.Uid);
                 if (response.ListLog != null)
                 {
                     response.Message = "Se consulto con Exito la informacion";

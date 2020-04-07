@@ -4,20 +4,20 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="NeptunoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="NeptunoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Log">
           <Key>
             <PropertyRef Name="id_reg" />
           </Key>
           <Property Name="id_reg" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
-          <Property Name="date_transaction" Type="datetime" Nullable="false" />
+          <Property Name="date_transaction" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Uid" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="NeptunoModelStoreContainer">
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NeptunoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -27,7 +27,8 @@
           </Key>
           <Property Name="id_reg" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
-          <Property Name="date_transaction" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="date_transaction" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Uid" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Logs" EntityType="Self.Log" />
@@ -41,6 +42,7 @@
           <EntitySetMapping Name="Logs">
             <EntityTypeMapping TypeName="NeptunoModel.Log">
               <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="Uid" ColumnName="Uid" />
                 <ScalarProperty Name="id_reg" ColumnName="id_reg" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="date_transaction" ColumnName="date_transaction" />

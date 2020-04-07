@@ -20,22 +20,22 @@ namespace WebApi.BOL
             }
             catch (Exception ex)
             {
-                throw new Exception("Error en BOL GetListLogs -" + ex.Message);
+                throw new Exception(ex.Message);
             }
         }
-        public List<ObjLogModel> GetListLogs(DateTime startDate, DateTime endDate)
+        public List<ObjLogModel> GetListLogs(DateTime startDate, DateTime endDate, int Uid)
         {
             try
             {
-                return UsersBuilder.ListLogToEntity(new TRN_Logs().GetListLogs(startDate.ToString("dd/MM/yyyy"), endDate.ToString("dd/MM/yyyy")));
+                return UsersBuilder.ListLogToEntity(new TRN_Logs().GetListLogs(startDate.ToString("yyyy/MM/dd"), endDate.ToString("yyyy/MM/dd"), Uid));
             }
             catch (Exception ex)
             {
-                throw new Exception("Error en BOL GetListLogs -" + ex.Message);
+                throw new Exception(ex.Message);
             }
         }
 
-        public ObjResponse InsertLog(Entities.ObjLogModel objLog)
+        public ObjResponse InsertLog(ObjLogModel objLog)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace WebApi.BOL
             }
             catch (Exception ex)
             {
-                throw new Exception("Error en BOL InsertLog-" + ex.Message);
+                throw new Exception(ex.Message);
             }
         }
     }

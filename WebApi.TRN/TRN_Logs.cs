@@ -18,7 +18,7 @@ namespace WebApi.TRN
             }
             catch (Exception ex)
             {
-                throw new Exception("Error en TRN InsertLog - " + ex.Message);
+                throw new Exception(ex.Message);
             }
         }
         public List<DAL.Data.Log> GetListLogs()
@@ -32,11 +32,11 @@ namespace WebApi.TRN
                 throw new Exception("Error en TRN GetListLogs - " + ex.Message);
             }
         }
-        public List<DAL.Data.Log> GetListLogs(string startDate, string endDate)
+        public List<DAL.Data.Log> GetListLogs(string startDate, string endDate, int Uid)
         {
             try
             {
-                return new DAL_Logs().GetListLogs(startDate, endDate);
+                return new DAL_Logs().GetListLogs(startDate, endDate, Uid);
             }
             catch (Exception ex)
             {

@@ -17,5 +17,6 @@ namespace WebApi.DAL.Data
         public int id_reg { get; set; }
         public bool Status { get; set; }
         public System.DateTime date_transaction { get; set; }
+        public int Uid { get; set; }
     }
 }
