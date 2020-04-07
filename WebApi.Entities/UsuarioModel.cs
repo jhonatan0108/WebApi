@@ -22,4 +22,14 @@ namespace WebApi.Entities
         public string EmailAddress { get; set; }
         public string PasswordHash { get; set; }
     }
+    public class ResponseUser
+    {
+        private UsuarioModel _User;
+        private bool _Response;
+        private string _Message = string.Empty;
+
+        public UsuarioModel User { get => _User; set => _User = value; }
+        public bool Response { get => _Response; set => _Response = value; }
+        public string Message { get => _Message; set => _Message = value; }
+    }
 }

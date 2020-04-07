@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Helpers;
 using WebApi;
+using WebApi.Entities;
 using WebApi.Management;
 using WebApi.Management.UsersBuilder;
 
@@ -33,7 +34,7 @@ namespace WebApi.BOL
             }
             return objuser;
         }
-        public bool GetUserLogin(string User, string Password)
+        public ResponseUser GetUserLogin(string User, string Password)
         {
             try
             {
@@ -42,13 +43,29 @@ namespace WebApi.BOL
                 if (objuser != null)
                 {
                     if (Crypto.VerifyHashedPassword(objuser.PasswordHash, Password))
-                        return true;
+                    {
+                        ResponseUser objres = new ResponseUser();
+                        objres.User = objuser;
+                        objres.Response = true;
+                        objres.Message = "Consultado con Exito";
+                        return objres;
+                    }
                     else
-                        return false;
+                    {
+                        ResponseUser objres = new ResponseUser();
+                        objres.User = objuser;
+                        objres.Response = false;
+                        objres.Message = "La contraseña no corresponde.";
+                        return objres;
+                    }
                 }
                 else
                 {
-                    return false;
+                    ResponseUser objres = new ResponseUser();
+                    objres.User = objuser;
+                    objres.Response = false;
+                    objres.Message = "No se encontro informacion del usuario.";
+                    return objres;
                 }
             }
             catch (Exception ex)

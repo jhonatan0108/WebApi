@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Web.Helpers;
 using System.Web.Http;
 using WebApi;
-
+using WebApi.Entities;
 
 namespace WebApi.Controllers
 {
@@ -63,17 +63,23 @@ namespace WebApi.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("loginUser")]
-        public bool LoginUser(Entities.LoginUserModel pLogin)
+        public ResponseUser LoginUser(Entities.LoginUserModel pLogin)
         {
             try
             {
-                pResp = _bolUser.GetUserLogin(pLogin.UserName, pLogin.Password);
-            }
-            catch (Exception)
-            {
+                ResponseUser pResp = _bolUser.GetUserLogin(pLogin.UserName, pLogin.Password);
                 return pResp;
             }
-            return pResp;
+            catch (Exception ex)
+            {
+                ResponseUser responseUser = new ResponseUser()
+                {
+                    Response = false,
+                    Message = ex.Message,
+                    User = null
+                };
+                return responseUser;
+            }
         }
         [HttpGet]
         //[Authorize(Roles = "Admin")]
