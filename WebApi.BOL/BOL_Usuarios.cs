@@ -40,7 +40,7 @@ namespace WebApi.BOL
             {
                 //Busco el Usuario con el fin de comparar SI es valido o NO
                 objuser = UsersBuilder.EntityToUser(usuarios.GetUserByUser(User));
-                if (objuser != null)
+                if (objuser.UserName != null)
                 {
                     if (Crypto.VerifyHashedPassword(objuser.PasswordHash, Password))
                     {

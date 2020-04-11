@@ -24,18 +24,25 @@ namespace WebApi.Management.UsersBuilder
             };
             return response;
         }
-        public static UsuarioModel EntityToUser(DAL.Data.Users data_User)
+        public static UsuarioModel EntityToUser(Users data_User)
         {
-            UsuarioModel response = new UsuarioModel()
+            if (data_User==null)
             {
-                ID = data_User.ID,
-                FirstName = data_User.FirstName.ToUpper(),
-                LastName = data_User.LastName.ToUpper(),
-                UserName = data_User.UserName.ToUpper(),
-                EmailAddress = data_User.EmailAddress.ToUpper(),
-                PasswordHash = data_User.PasswordHash
-            };
-            return response;
+                return new UsuarioModel();
+            }
+            else
+            {
+                UsuarioModel response = new UsuarioModel()
+                {
+                    ID = data_User.ID,
+                    FirstName = data_User.FirstName.ToUpper(),
+                    LastName = data_User.LastName.ToUpper(),
+                    UserName = data_User.UserName.ToUpper(),
+                    EmailAddress = data_User.EmailAddress.ToUpper(),
+                    PasswordHash = data_User.PasswordHash
+                };
+                return response;
+            }
         }
         public static List<DAL.Data.Users> ListUserToEntity(List<UsuarioModel> List_Usuario)
         {
@@ -102,7 +109,7 @@ namespace WebApi.Management.UsersBuilder
                     {
                         Status = item.Status,
                         DateTransaction = DateTime.Parse(item.date_transaction.ToString("MM/dd/yyyy HH:mm:ss")),
-                        Uid=item.Uid
+                        Uid = item.Uid
                     };
                     _List.Add(response);
                 }
